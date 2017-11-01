@@ -12,16 +12,18 @@ public class Hazard : MonoBehaviour {
     public float spawnPositionX;
     private float marginY;
     private bool isRotated;
+    private float transformPositionX; //содержит в себе координаты респа по X - эти данные нигде не меняются
 
 	void Start () {
         transform = GetComponent<Transform>();
         defaultPosition = new Vector3(spawnPositionX, transform.position.y, transform.position.z);
         position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        transformPositionX = transform.position.x;
         marginY = 1.14F;
         isRotated = false;
 	}
 	
-	void FixedUpdate () {
+	void FixedUpdate () {      
         position.x -= speed * Time.deltaTime;
         transform.position = position;
 	}

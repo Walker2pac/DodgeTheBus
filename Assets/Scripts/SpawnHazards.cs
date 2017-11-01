@@ -1,4 +1,4 @@
-п»їusing System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class SpawnHazards : MonoBehaviour {
 
     public Transform hazardSpawn;
     public Hazard hazard;
+	public HazardRight hazardRight;
 
     //public float maxLines;
     public Vector2 firstLineHazards;
@@ -18,6 +19,8 @@ public class SpawnHazards : MonoBehaviour {
 
     public float marginX;
     public float marginY;
+	public float spawnPositionXRight;
+	public float spawnPositionXLeft;
 
 	void Start () 
     {
@@ -27,9 +30,8 @@ public class SpawnHazards : MonoBehaviour {
     void Spawn()
     {
         Vector3 spawnPosition = new Vector3(hazardSpawn.position.x, hazardSpawn.position.y, hazardSpawn.position.z);
-        float defaultPositionX = spawnPosition.x;
         //////////////////////////////////////////////
-        //РџРµСЂРІР°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Первая линия(отсчет снизу)
         for (int i = 0; i < firstLineHazards.x; i++)
         {
             if(i == firstLineHazards.y || i == firstLineHazards.y + 1 || i == firstLineHazards.y + 2) 
@@ -43,26 +45,26 @@ public class SpawnHazards : MonoBehaviour {
             }
 
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXLeft;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //Р’С‚РѕСЂР°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Вторая линия(отсчет снизу)
         for (int i = 0; i < secondLineHazards.x; i++)
         {
             if (i == secondLineHazards.y || i == secondLineHazards.y + 1 || i == secondLineHazards.y + 2)
             {
-                spawnPosition.x -= marginX;
+                spawnPosition.x += marginX;
             }
             else
             {
-                Instantiate(hazard, spawnPosition, hazardSpawn.rotation);
-                spawnPosition.x -= marginX;
+                Instantiate(hazardRight, spawnPosition, hazardSpawn.rotation);
+                spawnPosition.x += marginX;
             }
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXRight;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //РўСЂРµС‚СЊСЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Третья линия(отсчет снизу)
         for (int i = 0; i < thirdLineHazards.x; i++)
         {
             if (i == thirdLineHazards.y || i == thirdLineHazards.y + 1 || i == thirdLineHazards.y + 2)
@@ -75,10 +77,10 @@ public class SpawnHazards : MonoBehaviour {
                 spawnPosition.x -= marginX;
             }
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXLeft;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //Р§РµС‚РІРµСЂС‚Р°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Четвертая линия(отсчет снизу)
         for (int i = 0; i < fourthLineHazards.x; i++)
         {
             if (i == fourthLineHazards.y || i == fourthLineHazards.y + 1 || i == fourthLineHazards.y + 2)
@@ -87,14 +89,14 @@ public class SpawnHazards : MonoBehaviour {
             }
             else
             {
-                Instantiate(hazard, spawnPosition, hazardSpawn.rotation);
-                spawnPosition.x -= marginX;
+                Instantiate(hazardRight, spawnPosition, hazardSpawn.rotation);
+                spawnPosition.x += marginX;
             }
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXRight;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //РџСЏС‚Р°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Пятая линия(отсчет снизу)
         for (int i = 0; i < fifthLineHazards.x; i++)
         {
             if (i == fifthLineHazards.y || i == fifthLineHazards.y + 1 || i == fifthLineHazards.y + 2)
@@ -107,10 +109,10 @@ public class SpawnHazards : MonoBehaviour {
                 spawnPosition.x -= marginX;
             }
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXLeft;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //РЁРµСЃС‚Р°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Шестая линия(отсчет снизу)
         for (int i = 0; i < sixthLineHazards.x; i++)
         {
             if (i == sixthLineHazards.y || i == sixthLineHazards.y + 1 || i == sixthLineHazards.y + 2)
@@ -119,14 +121,14 @@ public class SpawnHazards : MonoBehaviour {
             }
             else
             {
-                Instantiate(hazard, spawnPosition, hazardSpawn.rotation);
-                spawnPosition.x -= marginX;
+                Instantiate(hazardRight, spawnPosition, hazardSpawn.rotation);
+                spawnPosition.x += marginX;
             }
         }
-        spawnPosition.x = defaultPositionX;
+        spawnPosition.x = spawnPositionXRight;
         spawnPosition.y += marginY;
         //////////////////////////////////////////////
-        //РЎРµРґСЊРјР°СЏ Р»РёРЅРёСЏ(РѕС‚СЃС‡РµС‚ СЃРЅРёР·Сѓ)
+        //Седьмая линия(отсчет снизу)
         for (int i = 0; i < seventhLineHazards.x; i++)
         {
             if (i == seventhLineHazards.y || i == seventhLineHazards.y + 1 || i == seventhLineHazards.y + 2)
