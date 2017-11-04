@@ -15,15 +15,17 @@ public class PlayerController : MonoBehaviour {
     public float speed;
 
     private Rigidbody2D rigidbody;
-	
-	void Start () {
+
+    void Start()
+    {
         rigidbody = GetComponent<Rigidbody2D>();
-	}
-	
-	void FixedUpdate () {
+    }
+
+    void FixedUpdate()
+    {
         if (Input.GetButton("Horizontal")) MoveHorizontal();
         if (Input.GetButton("Vertical")) MoveVertical();
-     }
+    }
 
     private void MoveHorizontal()
     {
@@ -32,11 +34,11 @@ public class PlayerController : MonoBehaviour {
         {
             transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
         }
-        
+
     }
     private void MoveVertical()
     {
-        Vector3 direction = transform.up * Input.GetAxis("Vertical");  
+        Vector3 direction = transform.up * Input.GetAxis("Vertical");
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
     }
 
