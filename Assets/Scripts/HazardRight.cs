@@ -16,9 +16,7 @@ public class HazardRight : MonoBehaviour {
 
 	void Start () {
 		transform = GetComponent<Transform>();
-		Debug.Log (rigidbody + "");
 		rigidbody = GetComponent<Rigidbody2D> ();
-		Debug.Log (rigidbody + "");
 		defaultPosition = new Vector3(spawnPositionX, transform.position.y, transform.position.z);
 		position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 		marginY = 1.14F;
