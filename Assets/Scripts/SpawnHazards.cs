@@ -16,16 +16,71 @@ public class SpawnHazards : MonoBehaviour {
     public Vector2 fifthLineHazards;
     public Vector2 sixthLineHazards;
     public Vector2 seventhLineHazards;
+    public int sizeOfHazards;
+
+    private Vector3[] arrayOfHazards;
 
     public float marginX;
     public float marginY;
 	public float spawnPositionXRight;
 	public float spawnPositionXLeft;
+    public int numberOfLines;
+    private bool changeLine;
+    private bool stopSpawn;
 
 	void Start () 
     {
-        Spawn();
+        arrayOfHazards = new Vector3[numberOfLines];
+        changeLine = false;
+        stopSpawn = false;
+        //Spawn();
+        FillArrayOfHazards();
 	}
+
+    void FillArrayOfHazards()
+    {
+        Vector3 spawnPosition = new Vector3(hazardSpawn.position.x, hazardSpawn.position.y, hazardSpawn.position.z);
+        for (int i = 0; i < arrayOfHazards.Length; i++ )
+        {
+            int spaceInHazards = (int)Random.Range(1.0F, sizeOfHazards);
+            for(int j = 0; j < sizeOfHazards; j++)
+            {   
+                if(j == spaceInHazards || j == spaceInHazards + 1 || j == spaceInHazards + 2)
+                {
+                    stopSpawn = true;
+                }
+
+                if (changeLine == false && stopSpawn == false)
+                {
+                    Instantiate(hazard, spawnPosition, hazardSpawn.rotation);
+                    spawnPosition.x -= marginX;
+                }
+                if (changeLine == true && stopSpawn == false)
+                {
+                    Instantiate(hazardRight, spawnPosition, hazardSpawn.rotation);
+                    spawnPosition.x += marginX;
+                }              
+                
+                stopSpawn = false;
+            }
+            //переводит курсор влево
+            if (changeLine == false)
+            {
+                spawnPosition.x = spawnPositionXLeft;
+                spawnPosition.y += marginY;
+                changeLine = true;
+            }
+            //переводит курсор вправо
+            else if(changeLine == true)
+            {
+                spawnPosition.x = spawnPositionXRight;
+                spawnPosition.y += marginY;
+                changeLine = false;
+            }
+
+
+        }
+    }
 
     void Spawn()
     {

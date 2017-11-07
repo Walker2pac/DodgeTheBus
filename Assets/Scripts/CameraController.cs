@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour {
 
         if (coll.gameObject.tag == "CameraPoint")
         {
-            transform.position = new Vector3(transform.position.x, gameObject.transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, gameObject.transform.position.y + 4, transform.position.z);
             Debug.Log("Camera Point");
         }
 

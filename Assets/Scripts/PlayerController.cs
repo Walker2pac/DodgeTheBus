@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float smooth;
+    public float rangePerFrame;
     private bool isMovedCamera;
     
 
@@ -31,11 +32,6 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetButton("Horizontal")) MoveHorizontal();
         if (Input.GetButton("Vertical")) MoveVertical();
-    }
-
-    void LateUpdate()
-    {
-        if (isMovedCamera) MoveCamera();
     }
 
     private void MoveHorizontal()
@@ -65,26 +61,18 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    void MoveCamera()
-    {
-        Vector3 startPosition = new Vector3(cameraController.transform.position.x, cameraController.transform.position.y, cameraController.transform.position.z);
-        Vector3 endPosition = new Vector3(cameraController.transform.position.x, transform.position.y + 1.5F, cameraController.transform.position.z);
-        cameraController.transform.position = Vector3.Lerp(startPosition, endPosition, smooth * Time.deltaTime);
-        Debug.Log("Camera Point");
-    }
-
     public IEnumerator CameraMovementCoroutine()
     {
         int count = 1;
-        while(30 > count)
+        int totalCount = 30;
+        while(totalCount > count)
         {
             count = count + 1;
-            cameraCoordinates.y = cameraCoordinates.y + 0.07F;
+            cameraCoordinates.y = cameraCoordinates.y + rangePerFrame;
             cameraController.transform.position = cameraCoordinates;
             yield return null;
             Debug.Log(count);
         }
-        Debug.Log("Movement Done");
     }
 
 
