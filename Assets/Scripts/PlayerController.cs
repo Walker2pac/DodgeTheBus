@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     private CameraController cameraController;
     private Rigidbody2D rigidbody;
     private Vector3 playerCoordinates, cameraCoordinates;
+    private Transform transform;
 
     public float speed;
     public float smooth;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     {
         rigidbody = GetComponent<Rigidbody2D>();
         cameraController = FindObjectOfType<CameraController>();
+        transform = GetComponent<Transform>();
         isMovedCamera = false;
     }
 
