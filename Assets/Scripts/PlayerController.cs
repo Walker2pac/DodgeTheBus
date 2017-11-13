@@ -11,6 +11,7 @@ public class Boundary
 public class PlayerController : MonoBehaviour {
 
     public Boundary boundary;
+    public VictorySprite victorySprite;
     private CameraController cameraController;
     private Rigidbody2D rigidbody;
     private Vector3 playerCoordinates, cameraCoordinates;
@@ -59,6 +60,10 @@ public class PlayerController : MonoBehaviour {
             playerCoordinates = transform.position;
             cameraCoordinates = cameraController.transform.position;
             StartCoroutine(CameraMovementCoroutine());
+        }
+        if(coll.gameObject.tag == "Finish")
+        {
+            victorySprite.gameObject.SetActive(true);
         }
 
     }

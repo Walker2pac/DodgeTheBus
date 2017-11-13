@@ -11,7 +11,7 @@ public class SpawnCameraPoints : MonoBehaviour {
 
 	void Start () {
         Vector3 cameraPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        for (int i = 0; i < 8; i++)
+        for (int i = 1; i <= 2; i++)
         {
             cameraPosition.y = cameraPosition.y + marginY;
             Instantiate(cameraPoint, cameraPosition, transform.rotation);
