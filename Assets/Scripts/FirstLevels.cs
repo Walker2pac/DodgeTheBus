@@ -20,6 +20,7 @@ public class FirstLevels : MonoBehaviour {
         spawn3Line();
         spawn4Line();
         spawn5Line();
+        spawn6Line();
 	}
 
     void spawn1Line()
@@ -100,6 +101,24 @@ public class FirstLevels : MonoBehaviour {
         for (int i = 0; i < sizeOfHazards; i++)
         {
             if (i == Line5Spacing || i == Line5Spacing + 1 || i == Line5Spacing + 2)
+            {
+                spawnPosition.x += marginX;
+            }
+            else
+            {
+                Instantiate(hazardRight, spawnPosition, spawnPositionRight.rotation);
+                spawnPosition.x += marginX;
+            }
+        }
+        spawnPosition.x = spawnPosition.x + 0.2F;
+        Instantiate(boundary, spawnPosition, spawnPositionRight.rotation);
+    }
+    void spawn6Line()
+    {
+        Vector3 spawnPosition = new Vector3(spawnPositionLeft.position.x, spawnPositionLeft.position.y + 19, spawnPositionLeft.position.z);
+        for (int i = 0; i < sizeOfHazards; i++)
+        {
+            if (i == Line6Spacing || i == Line6Spacing + 1 || i == Line6Spacing + 2)
             {
                 spawnPosition.x += marginX;
             }
