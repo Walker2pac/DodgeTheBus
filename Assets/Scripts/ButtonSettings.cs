@@ -9,6 +9,7 @@ public class ButtonSettings : MonoBehaviour {
     public int releasedLevel;
     public string nextLevel;
 
+
     void Awake()
     {
         if (PlayerPrefs.HasKey("Level"))
