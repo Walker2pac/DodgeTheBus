@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class GroupOfHazards : MonoBehaviour {
 
-    public Transform transformSpawnPosition;
-    private Vector3 spawnPosition;
-
-	void Start () {
-        spawnPosition = transformSpawnPosition.position;
-	}
+    public Vector3 spawnPosition;
 
     public Vector3 getSpawnPosition()
     {
