@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class LevelControlScript : MonoBehaviour {
 
 	public static LevelControlScript instance = null;
-	GameObject levelSign, gameOverText, youWinText;
 	int sceneIndex, levelPassed;
 
 	void Start () {
@@ -21,16 +20,14 @@ public class LevelControlScript : MonoBehaviour {
 		levelPassed = PlayerPrefs.GetInt ("LevelPassed");
 	}
 
-	public void youWin()
+	public void goToNextLevel()
 	{
 		if (sceneIndex == 3)
 			Invoke ("loadMainMenu", 1f);
 		else {
 			if (levelPassed < sceneIndex)
 				PlayerPrefs.SetInt ("LevelPassed", sceneIndex);
-			/*levelSign.gameObject.SetActive (false);
-			youWinText.gameObject.SetActive (true);*/
-			Invoke ("loadNextLevel", 1f);
+			Invoke ("loadNextLevel", 0.2f);
 		}
 	}
 

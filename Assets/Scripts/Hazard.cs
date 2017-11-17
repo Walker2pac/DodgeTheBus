@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour {
 
+    private GroupOfHazards groupOfHazards; //Объект SpawnPositionRight на сцене
+
     private Vector3 defaultPosition;
+    private Vector3 spawnPosition; //хранит в себе координаты объекта SpawnPositionRight на сцене
     private Transform transform;
     private Vector3 position;
 
     public float speed;
-    public float spawnPositionX;
-    private float marginY;
-    private bool isRotated;
-    private float transformPositionX; //содержит в себе координаты респа по X - эти данные нигде не меняются
+    private string nameOfSpawn;
 
 	void Start () {
         transform = GetComponent<Transform>();
-        defaultPosition = new Vector3(spawnPositionX, transform.position.y, transform.position.z);
+        spawnPosition = gameObject.GetComponentInParent<GroupOfHazards>().getSpawnPosition();
+        defaultPosition = new Vector3(spawnPosition.x, transform.position.y, transform.position.z);
         position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        transformPositionX = transform.position.x;
-        marginY = 1.14F;
-        isRotated = false;
 	}
 	
 	void FixedUpdate () {      
@@ -37,9 +35,4 @@ public class Hazard : MonoBehaviour {
         }
 
     }
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-
-    }
-
 }

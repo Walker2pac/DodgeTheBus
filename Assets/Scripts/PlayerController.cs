@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public float smooth;
     public float rangePerFrame;
-    private bool isMovedCamera;
     
 
     void Start()
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody2D>();
         cameraController = FindObjectOfType<CameraController>();
         transform = GetComponent<Transform>();
-        isMovedCamera = false;
         levelCompletedImage = GameObject.FindWithTag("LevelCompletedImage");
         nextLevelButtonObject = GameObject.FindWithTag("NextLevelButton");
         Debug.Log("GameObject" + GameObject.FindWithTag("LevelCompletedImage"));
@@ -59,13 +57,7 @@ public class PlayerController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll)
     {
 
-        if (coll.gameObject.tag == "CameraPoint")
-        {
-            /* При старте уровня создается куча объектов под тегом CameraPoint*/
-            cameraCoordinates = cameraController.transform.position;
-            StartCoroutine(CameraMovementCoroutine());
-        }
-        if(coll.gameObject.tag == "Finish")
+        if (coll.gameObject.tag == "Finish")
         {
             /* При столкновении коллизии игрока с коллизей GameObject Finish происходит следующее:
              * отключается управление игроком с помощью переменной speed, так со скоростью 0 невозможно перемещаться

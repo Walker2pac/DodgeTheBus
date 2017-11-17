@@ -6,6 +6,6 @@ public class FinishLevel : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		LevelControlScript.instance.youWin ();
+		//LevelControlScript.instance.youWin ();
 	}
 }
