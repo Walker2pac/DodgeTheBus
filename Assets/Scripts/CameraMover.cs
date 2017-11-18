@@ -9,7 +9,6 @@ public class CameraMover : MonoBehaviour {
     private float rangePerFrame;
 
 	void Start () {
-        cameraCoordinates = camera.transform.position;
         rangePerFrame = 0.12F;
 	}
 	
@@ -23,6 +22,7 @@ public class CameraMover : MonoBehaviour {
     {
         int count = 1;
         int totalCount = 50;
+        cameraCoordinates = camera.transform.position;
         while (totalCount > count)
         {
             count = count + 1;
@@ -32,7 +32,7 @@ public class CameraMover : MonoBehaviour {
         }
         if (totalCount == count)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }

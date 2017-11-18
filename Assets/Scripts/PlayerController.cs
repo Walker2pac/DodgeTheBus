@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rigidbody;
     private Vector3 playerCoordinates, cameraCoordinates;
     private Transform transform;
-    private GameObject levelCompletedImage, nextLevelButtonObject;
+    private GameObject levelCompletedImage, nextLevelButtonObject, gameOverObject, playAgainButtonObject, playAgainTextObject;
 
     public float speed;
     public float smooth;
@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour {
         transform = GetComponent<Transform>();
         levelCompletedImage = GameObject.FindWithTag("LevelCompletedImage");
         nextLevelButtonObject = GameObject.FindWithTag("NextLevelButton");
+        gameOverObject = GameObject.Find("Game Over");
+        playAgainButtonObject = GameObject.Find("Play Again");
+        playAgainTextObject = GameObject.Find("PlayAgainText");
         Debug.Log("GameObject" + GameObject.FindWithTag("LevelCompletedImage"));
     }
 
@@ -72,6 +75,18 @@ public class PlayerController : MonoBehaviour {
             nextLevelButtonRenderer.enabled = true;
             Button nextLevelButton = nextLevelButtonObject.GetComponent<Button>();
             nextLevelButton.enabled = true;
+        }
+        if (coll.gameObject.tag == "Boundary")
+        {
+            speed = 0;
+            Text gameOverText = gameOverObject.GetComponent<Text>();
+            gameOverText.enabled = true;
+            Button playAgainButton = playAgainButtonObject.GetComponent<Button>();
+            playAgainButton.enabled = true;
+            Image playAgainImage = playAgainButtonObject.GetComponent<Image>();
+            playAgainImage.enabled = true;
+            Text playAgainText = playAgainTextObject.GetComponent<Text>();
+            playAgainText.enabled = true;
         }
 
     }
