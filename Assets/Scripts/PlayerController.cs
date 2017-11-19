@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour {
     private GameObject levelCompletedImage, nextLevelButtonObject, gameOverObject, playAgainButtonObject, playAgainTextObject;
 
     public float speed;
-    public float smooth;
-    public float rangePerFrame;
     
 
     void Start()
@@ -76,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             Button nextLevelButton = nextLevelButtonObject.GetComponent<Button>();
             nextLevelButton.enabled = true;
         }
-        if (coll.gameObject.tag == "Boundary")
+        if (coll.gameObject.tag == "Deathline")
         {
             speed = 0;
             Text gameOverText = gameOverObject.GetComponent<Text>();
@@ -90,19 +88,5 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
-
-    public IEnumerator CameraMovementCoroutine()
-    {
-        int count = 1;
-        int totalCount = 30;
-        while(totalCount > count)
-        {
-            count = count + 1;
-            cameraCoordinates.y = cameraCoordinates.y + rangePerFrame;
-            cameraController.transform.position = cameraCoordinates;
-            yield return null;
-        }
-    }
-
 
 }

@@ -4,29 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    private PlayerController thePlayer;
-    private Vector3 lastPlayerPosition;
-    private Transform transform;
-
-    public float offset;
-    private float count;
-    private float distanceToMove;
+    public GameObject player;
+    
+    private Vector3 offset;
 
 	void Start () {
-        thePlayer = FindObjectOfType<PlayerController>();
-        lastPlayerPosition = thePlayer.transform.position;
-        transform = GetComponent<Transform>();
+        offset = transform.position - player.transform.position;
 	}
 
-    void OnTriggerEnter2D(Collider2D coll)
+    void LateUpdate()
     {
-
-        if (coll.gameObject.tag == "CameraPoint")
-        {
-            transform.position = new Vector3(transform.position.x, gameObject.transform.position.y + 4, transform.position.z);
-            Debug.Log("Camera Point");
-        }
-
+        transform.position = player.transform.position + offset;
     }
+
 
 }
