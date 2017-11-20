@@ -5,43 +5,38 @@ using UnityEngine;
 public class HazardRight : MonoBehaviour {
 
 	private Vector3 defaultPosition;
+    private Rigidbody2D rigidbody;
 	private Transform transform;
 	private Vector3 position;
-	private Rigidbody2D rigidbody;
+    private Vector3 spawnPosition; //хранит в себе координаты объекта SpawnPositionRight на сцене
 
-	public float speed;
-	public float spawnPositionX; //переменная Х где появляется коробка после столкновения с Boundary
-	private float marginY;
-	private bool isRotated;
+
+	private float speed;
 
 	void Start () {
 		transform = GetComponent<Transform>();
-		rigidbody = GetComponent<Rigidbody2D> ();
-		defaultPosition = new Vector3(spawnPositionX, transform.position.y, transform.position.z);
-		position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-		marginY = 1.14F;
-		isRotated = false;
+        rigidbody = GetComponent<Rigidbody2D>();
+        spawnPosition = gameObject.GetComponentInParent<GroupOfHazards>().getSpawnPosition();
+        speed = gameObject.GetComponentInParent<GroupOfHazards>().getMovementSpeed();
+        defaultPosition = new Vector3(spawnPosition.x, transform.position.y, transform.position.z);
+        position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 	}
 
 	void Update () { 
-		position.x += speed * Time.deltaTime;
-		transform.position = position;
 	}
+    void FixedUpdate()
+    {
+        rigidbody.velocity = (Vector3.right * 1)  * speed * Time.deltaTime;
+    }
 
-	void OnTriggerEnter2D(Collider2D coll)
-	{
+    void OnTriggerEnter2D(Collider2D coll)
+    {
 
-		if (coll.gameObject.tag == "Boundary")
-		{
-			position = defaultPosition;
-		}
+        if (coll.gameObject.tag == "Boundary")
+        {
+            transform.position = defaultPosition;
+        }
 
-	}
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-		if(coll.gameObject.tag == "Boundary1") 
-		{
-			Debug.Log("Collision");
-		}
-	}
+    }
+
 }

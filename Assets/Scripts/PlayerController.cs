@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     private GameObject levelCompletedImage, nextLevelButtonObject, gameOverObject, playAgainButtonObject, playAgainTextObject;
 
     public float speed;
+    private float xInput, yInput;
+    private bool isMoving;
     
 
     void Start()
@@ -31,28 +33,41 @@ public class PlayerController : MonoBehaviour {
         gameOverObject = GameObject.Find("Game Over");
         playAgainButtonObject = GameObject.Find("Play Again");
         playAgainTextObject = GameObject.Find("PlayAgainText");
-        Debug.Log("GameObject" + GameObject.FindWithTag("LevelCompletedImage"));
+        isMoving = false;
     }
 
     void FixedUpdate()
     {
-        if (Input.GetButton("Horizontal")) MoveHorizontal();
-        if (Input.GetButton("Vertical")) MoveVertical();
+        //if (Input.GetButton("Horizontal")) MoveHorizontal();
+        //if (Input.GetButton("Vertical")) MoveVertical();
+    }
+    void Update()
+    {
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
+
+        isMoving = (xInput != 0 || yInput != 0);
+
+        if(isMoving)
+        {
+            var moveVector = new Vector3(xInput, yInput, 0);
+            rigidbody.MovePosition(new Vector2((transform.position.x + moveVector.x * speed * Time.deltaTime),
+                transform.position.y + moveVector.y * speed * Time.deltaTime));
+        }
     }
 
     private void MoveHorizontal()
     {
         Vector3 direction = transform.right * Input.GetAxis("Horizontal");
-        if (transform.position.x + direction.x < 9 && transform.position.x + direction.x > -9)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
-        }
-
+        Debug.Log("transform right = " + transform.right);
+        Debug.Log("input.getaxis = " + Input.GetAxis("Horizontal"));
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
     }
     private void MoveVertical()
     {
         Vector3 direction = transform.up * Input.GetAxis("Vertical");
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+        transform.Translate((Vector3.up * Input.GetAxis("Vertical")) * speed * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D coll)
