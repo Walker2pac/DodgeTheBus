@@ -9,6 +9,7 @@ public class LevelControlScript : MonoBehaviour {
 	public static LevelControlScript instance = null;
 	int sceneIndex, levelPassed;
 
+
 	void Start () {
 		
 		if (instance == null)
@@ -18,6 +19,7 @@ public class LevelControlScript : MonoBehaviour {
 
 		sceneIndex = SceneManager.GetActiveScene ().buildIndex;
 		levelPassed = PlayerPrefs.GetInt ("LevelPassed");
+
 	}
 
 	public void goToNextLevel()
@@ -45,4 +47,6 @@ public class LevelControlScript : MonoBehaviour {
 	{
 		SceneManager.LoadScene ("LevelMenu");
 	}
+
+
 }

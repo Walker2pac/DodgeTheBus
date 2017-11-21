@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private GameObject levelCompletedImage, nextLevelButtonObject, gameOverObject, playAgainButtonObject, playAgainTextObject;
 
     public float speed;
+    private float move;
     private float xInput, yInput;
     private bool isMoving;
     
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         playAgainButtonObject = GameObject.Find("Play Again");
         playAgainTextObject = GameObject.Find("PlayAgainText");
         isMoving = false;
+        move = 1.16f;
     }
 
     void FixedUpdate()
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour {
     }
     void Update()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
+        /*xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
 
         isMoving = (xInput != 0 || yInput != 0);
@@ -51,9 +53,29 @@ public class PlayerController : MonoBehaviour {
         if(isMoving)
         {
             var moveVector = new Vector3(xInput, yInput, 0);
+            Debug.Log(moveVector);
             rigidbody.MovePosition(new Vector2((transform.position.x + moveVector.x * speed * Time.deltaTime),
                 transform.position.y + moveVector.y * speed * Time.deltaTime));
+        }*/
+
+        if(Input.GetKeyDown("w"))
+        {
+            rigidbody.MovePosition(new Vector2(transform.position.x, (transform.position.y + move)));
         }
+        else if (Input.GetKeyDown("s"))
+        {
+            rigidbody.MovePosition(new Vector2(transform.position.x, (transform.position.y - move)));
+        }
+        else if (Input.GetKeyDown("a"))
+        {
+            rigidbody.MovePosition(new Vector2(transform.position.x - move, transform.position.y));
+        }
+        else if (Input.GetKeyDown("d"))
+        {
+            rigidbody.MovePosition(new Vector2(transform.position.x + move, transform.position.y));
+        }
+
+
     }
 
     private void MoveHorizontal()
